@@ -1,13 +1,7 @@
 package sample.Service;
 
 import sample.Domain.Car;
-import sample.Domain.CarIdException;
 import sample.Repository.IRepository;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Stack;
 
@@ -27,12 +21,12 @@ public class CarService {
 
 
     /**
-     * Adds an invoice with the given fields.
+     * Adds an car with the given fields.
      *
-     * @param id          the id - must be unique.
-     * @param model         the sum.
-     * @param basekm the description.
-     * @param rentPrice        the date - must be in dd.mm.yyyy format.
+     * @param id    - the id - must be unique.
+     * @param model - the model
+     * @param basekm - the base km
+     * @param rentPrice    - the rental price / day
      */
     public void add(int id, String model, int basekm, double rentPrice) {
 
@@ -45,13 +39,15 @@ public class CarService {
 //
 
     /**
-     * Gets a list of all invoices.
+     * Gets a list of all cars.
      *
-     * @return a list of all invoices.
+     * @return a list of all cars.
      */
     public List<Car> getAll() {
         return repository.getAll();
     }
+
+
 
     public void undo() {
         if (!undoableOperations.empty()) {
@@ -68,6 +64,8 @@ public class CarService {
             undoableOperations.add(lastOperation);
         }
     }
+
+
 
 
 }

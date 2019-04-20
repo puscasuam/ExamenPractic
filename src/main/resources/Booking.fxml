@@ -62,6 +62,19 @@
             </VBox.margin>
         </HBox>
 
+        <TextField fx:id="txtCarId" promptText="carID" />
+        <TextField fx:id="txtValueResult" promptText="result" editable="false" />
+
+        <HBox alignment="center" spacing="40">
+            <Button fx:id="btnRentalIncome" onAction="#btRentalIncomeClick" text="Compute value for given car ID" />
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </HBox>
+
+
+
+
     </VBox>
 
 </HBox>

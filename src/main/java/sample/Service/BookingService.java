@@ -35,15 +35,6 @@ public class BookingService {
     }
 
 
-//    public void remove(Integer id) throws CompanyException {
-//        Company existingCompany = companyRepository.findById(id);
-//
-//        if (existingCompany == null) {
-//            throw new CompanyException("There is no company with the given id!");
-//        }
-//        companyRepository.remove(id);
-//    }
-
     public List<RentedByDaysModelView> getRentalByDaysReport() {
 
         List<RentedByDaysModelView> rentedCars = new ArrayList<>();
@@ -53,8 +44,6 @@ public class BookingService {
         for (Booking bookingX : bookingRepository.getAll()) {
             int carIdX = bookingX.getCarID();
             int rentedDaysX = bookingX.getRentalDays();
-           // int clientInvoiceId = companyI.getInvoiceId();
-            //Car existingCar = carRepository.findById(clientInvoiceId);
 
             if (!frequencies.containsKey(carIdX)) {
                 frequencies.put(carIdX, rentedDaysX);
@@ -64,12 +53,12 @@ public class BookingService {
         }
 
 
-        for(Integer key : frequencies.keySet()){
+        for (Integer key : frequencies.keySet()) {
             int carIdX = key;
 
-            for(Car carX : carRepository.getAll()){
-                if(carX.getId() == carIdX){
-                    RentedByDaysModelView rentedCar = new RentedByDaysModelView(carX.getId(), carX.getModel(),frequencies.get(key));
+            for (Car carX : carRepository.getAll()) {
+                if (carX.getId() == carIdX) {
+                    RentedByDaysModelView rentedCar = new RentedByDaysModelView(carX.getId(), carX.getModel(), frequencies.get(key));
                     rentedCars.add(rentedCar);
                 }
             }
@@ -79,6 +68,24 @@ public class BookingService {
 
         return rentedCars;
     }
+
+
+    public double getValueReport(Integer carId) {
+        double value = 0;
+
+        Car existingCar = carRepository.findById(carId);
+        if (existingCar == null) {
+            throw new CarIdException("There is no car with the given id!");
+        }
+
+        for (Booking bookingX : bookingRepository.getAll()){
+           if(bookingX.getCarID() == carId){
+               value = bookingX.getRentalDays()*existingCar.getRentPrice();
+           }
+        }
+        return value;
+    }
+
 
     /**
      * Gets a list of all invoices.

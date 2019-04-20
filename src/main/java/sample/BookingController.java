@@ -23,6 +23,10 @@ public class BookingController {
     public TextField txtBookingRentalDays;
     public TextField txtBookingUsedKm;
     public Button btnAddBooking;
+    public TextField txtCarId;
+    public TextField txtValueResult;
+    public Button btnRentalIncome;
+    
 
 
     private BookingService bookingService;
@@ -60,27 +64,16 @@ public class BookingController {
         }
     }
 
-//    public void btnDeleteCompany(ActionEvent actionEvent) {
-//        Company selectedCompany = (Company) tableViewCompanies.getSelectionModel().getSelectedItem();
-//
-//        if (selectedCompany != null) {
-//
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("Confirmation dialog");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Are you sure?");
-//            Optional<ButtonType> action = alert.showAndWait();
-//
-//            if (action.get() == ButtonType.OK) {
-//                try {
-//                    companyService.remove(selectedCompany.getId());
-//                    companies.clear();
-//                    companies.addAll(companyService.getAll());
-//                } catch (RuntimeException rex) {
-//                    Common.showValidationError(rex.getMessage());
-//                }
-//            }
-//        }
-//    }
 
+    public void btRentalIncomeClick(ActionEvent actionEvent) {
+        try {
+            Integer id = Integer.parseInt(txtCarId.getText());
+            double value = bookingService.getValueReport(id);
+            txtValueResult.setText(String.valueOf(value));
+
+        } catch (RuntimeException rex) {
+            Common.showValidationError(rex.getMessage());
+        }
+
+    }
 }

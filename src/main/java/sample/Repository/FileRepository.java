@@ -111,7 +111,7 @@ public class FileRepository<T extends Entity> implements IRepository<T>{
      */
     @Override
     public List<T> getAll() {
-             loadFromFile();
+        loadFromFile();
         return new ArrayList<>(storage.values());
     }
 

@@ -26,7 +26,10 @@ public class BookingController {
     public TextField txtCarId;
     public TextField txtValueResult;
     public Button btnRentalIncome;
-    
+    public TextField txtCarID;
+    public TextField txtKmResult;
+    public Button btnTotalKm;
+
 
 
     private BookingService bookingService;
@@ -74,6 +77,19 @@ public class BookingController {
         } catch (RuntimeException rex) {
             Common.showValidationError(rex.getMessage());
         }
+
+    }
+
+    public void btnTotalKmClick(ActionEvent actionEvent) {
+        try {
+            Integer id = Integer.parseInt(txtCarID.getText());
+            Integer km = bookingService.getKm(id);
+            txtKmResult.setText(String.valueOf(km));
+
+        } catch (RuntimeException rex) {
+            Common.showValidationError(rex.getMessage());
+        }
+
 
     }
 }

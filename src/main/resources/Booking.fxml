@@ -72,7 +72,15 @@
             </VBox.margin>
         </HBox>
 
+        <TextField fx:id="txtCarID" promptText="carID" />
+        <TextField fx:id="txtKmResult" promptText="result" editable="false" />
 
+        <HBox alignment="center" spacing="40">
+            <Button fx:id="btnTotalKm" onAction="#btnTotalKmClick" text="Compute total km for given car ID" />
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </HBox>
 
 
     </VBox>

@@ -95,12 +95,45 @@ public class BookingService {
         for (Integer key : frequencies.keySet()) {
             int carIdX = key;
 
-            if(carIdX == carId){
-                value = frequencies.get(key)*existingCar.getRentPrice();
+            if (carIdX == carId) {
+                value = frequencies.get(key) * existingCar.getRentPrice();
             }
         }
 
         return value;
+    }
+
+    public int getKm(Integer carId) {
+        int km = 0;
+
+        Car existingCar = carRepository.findById(carId);
+
+        if (existingCar == null) {
+            throw new CarIdException("There is no car with the given id!");
+        }
+
+        Map<Integer, Integer> totalKmByRent = new HashMap<>();
+
+        for (Booking bookingX : bookingRepository.getAll()) {
+            int carIdX = bookingX.getCarID();
+            int usedKmByRent = bookingX.getUsedKm();
+
+            if (!totalKmByRent.containsKey(carIdX)) {
+                totalKmByRent.put(carIdX, usedKmByRent);
+            } else {
+                totalKmByRent.replace(carIdX, totalKmByRent.get(carIdX) + usedKmByRent);
+            }
+        }
+
+        for (Integer key : totalKmByRent.keySet()) {
+            int carIdX = key;
+
+            if (carIdX == carId) {
+                km = totalKmByRent.get(key) + existingCar.getBaseKm();
+            }
+        }
+
+        return km;
     }
 
 

@@ -9,6 +9,13 @@ public class Car extends Entity {
     private int baseKm;
     private double rentPrice;
 
+    /**
+     * Constructs a car
+     * @param id the id
+     * @param model - the model
+     * @param baseKm - the base km
+     * @param rentPrice - the rental price
+     */
     public Car(int id, String model, int baseKm, double rentPrice) {
         super(id);
         this.model = model;

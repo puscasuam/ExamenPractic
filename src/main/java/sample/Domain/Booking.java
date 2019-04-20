@@ -8,6 +8,13 @@ public class Booking extends Entity {
     private int rentalDays;
     private int usedKm;
 
+    /**
+     * Construct a booking
+     * @param id - the id
+     * @param carID - the car ID
+     * @param rentalDays - the rented days
+     * @param usedKm - used km
+     */
     public Booking(int id, int carID, int rentalDays, int usedKm) {
         super(id);
         this.carID = carID;

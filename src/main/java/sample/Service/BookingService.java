@@ -74,15 +74,32 @@ public class BookingService {
         double value = 0;
 
         Car existingCar = carRepository.findById(carId);
+
         if (existingCar == null) {
             throw new CarIdException("There is no car with the given id!");
         }
 
-        for (Booking bookingX : bookingRepository.getAll()){
-           if(bookingX.getCarID() == carId){
-               value = bookingX.getRentalDays()*existingCar.getRentPrice();
-           }
+        Map<Integer, Integer> frequencies = new HashMap<>();
+
+        for (Booking bookingX : bookingRepository.getAll()) {
+            int carIdX = bookingX.getCarID();
+            int rentedDaysX = bookingX.getRentalDays();
+
+            if (!frequencies.containsKey(carIdX)) {
+                frequencies.put(carIdX, rentedDaysX);
+            } else {
+                frequencies.replace(carIdX, frequencies.get(carIdX) + rentedDaysX);
+            }
         }
+
+        for (Integer key : frequencies.keySet()) {
+            int carIdX = key;
+
+            if(carIdX == carId){
+                value = frequencies.get(key)*existingCar.getRentPrice();
+            }
+        }
+
         return value;
     }
 

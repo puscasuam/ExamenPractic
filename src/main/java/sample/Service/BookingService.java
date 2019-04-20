@@ -22,7 +22,13 @@ public class BookingService {
         this.carRepository = carRepository;
     }
 
-
+    /**
+     * Construct
+     * @param id
+     * @param carID
+     * @param rentaldays
+     * @param usedKm
+     */
     public void add(int id, int carID, int rentaldays, int usedKm) {
 
         Car existingCar = carRepository.findById(carID);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox alignment="center" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RentedByDaysController">
+
+    <VBox maxWidth="1.7976931348623157E308" prefHeight="759.0" prefWidth="737.0" spacing="10">
+        <Label text="Rentals report view:" />
+
+        <TableView fx:id="tableViewRentedByDays" editable="true" fixedCellSize="0.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="275.0" prefWidth="737.0" tableMenuButtonVisible="true">
+            <columns>
+                <TableColumn fx:id="tableColumnId" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="257.00001525878906" resizable="false" text="id">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id" />
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="tableColumnModel" prefWidth="268.0" text="Model">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="model" />
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="tableColumnRentedDays" prefWidth="690.0" text="Rented days">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="rentDays" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </TableView>
+    </VBox>
+</HBox>

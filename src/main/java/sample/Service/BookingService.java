@@ -3,7 +3,7 @@ package sample.Service;
 import sample.Domain.Booking;
 import sample.Domain.Car;
 import sample.Domain.CarIdException;
-import sample.Domain.InvoicesSumByClientModelView;
+import sample.Domain.RentedByDaysModelView;
 import sample.Repository.IRepository;
 
 
@@ -44,32 +44,41 @@ public class BookingService {
 //        companyRepository.remove(id);
 //    }
 
-//    public List<InvoicesSumByClientModelView> getClientsReport() {
-//
-//        List<InvoicesSumByClientModelView> sumByClients = new ArrayList<>();
-//
-//        Map<String, Double> sumOfInvoices = new HashMap<>();
-//
-//        for (Company companyI : companyRepository.getAll()) {
-//            String clientI = companyI.getClient();
-//            int clientInvoiceId = companyI.getInvoiceId();
-//            Invoice existingInvoice = invoiceRepository.findById(clientInvoiceId);
-//
-//            if (!sumOfInvoices.containsKey(clientI)) {
-//                sumOfInvoices.put(clientI, existingInvoice.getSum());
-//            } else {
-//                sumOfInvoices.replace(clientI, sumOfInvoices.get(clientI) + existingInvoice.getSum());
-//            }
-//        }
+    public List<RentedByDaysModelView> getRentalByDaysReport() {
+
+        List<RentedByDaysModelView> rentedCars = new ArrayList<>();
+
+        Map<Integer, Integer> frequencies = new HashMap<>();
+
+        for (Booking bookingX : bookingRepository.getAll()) {
+            int carIdX = bookingX.getCarID();
+            int rentedDaysX = bookingX.getRentalDays();
+           // int clientInvoiceId = companyI.getInvoiceId();
+            //Car existingCar = carRepository.findById(clientInvoiceId);
+
+            if (!frequencies.containsKey(carIdX)) {
+                frequencies.put(carIdX, rentedDaysX);
+            } else {
+                frequencies.replace(carIdX, frequencies.get(carIdX) + rentedDaysX);
+            }
+        }
 
 
-//        for(String key : sumOfInvoices.keySet()){
-//            InvoicesSumByClientModelView sumByClient = new InvoicesSumByClientModelView(key, sumOfInvoices.get(key));
-//            sumByClients.add(sumByClient);
-//        }
-//
-//        return sumByClients;
-//    }
+        for(Integer key : frequencies.keySet()){
+            int carIdX = key;
+
+            for(Car carX : carRepository.getAll()){
+                if(carX.getId() == carIdX){
+                    RentedByDaysModelView rentedCar = new RentedByDaysModelView(carX.getId(), carX.getModel(),frequencies.get(key));
+                    rentedCars.add(rentedCar);
+                }
+            }
+        }
+
+        rentedCars.sort((v1, v2) -> v1.getRentDays() > v2.getRentDays() ? -1 : 0);
+
+        return rentedCars;
+    }
 
     /**
      * Gets a list of all invoices.

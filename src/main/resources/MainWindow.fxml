@@ -14,9 +14,9 @@
         <Button fx:id="btnBooking" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
                 maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnBookingClick"
                 text="Booking" textAlignment="JUSTIFY" textFill="#171616"/>
-        <!--<Button fx:id="btnClientsRV" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"-->
-                <!--maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClientsRVClick"-->
-                <!--text="Clients Report View" textAlignment="JUSTIFY" textFill="#171616"/>-->
+        <Button fx:id="btnRentedByDaysMV" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnRentedByDaysMVClick"
+                text="Rented by days Report View" textAlignment="JUSTIFY" textFill="#171616"/>
     </VBox>
 
 </HBox>

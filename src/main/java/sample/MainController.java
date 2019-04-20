@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 public class MainController {
     public Button btnCar;
     public Button btnBooking;
+    public Button btnRentedByDaysMV;
+
 
     private CarService carService;
     private BookingService bookingService;
@@ -26,30 +28,6 @@ public class MainController {
         this.bookingService = bookingService;
     }
 
-
-
-//    public void btnClientsRVClick(ActionEvent actionEvent) {
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader();
-//            fxmlLoader.setLocation(getClass().getResource("/Clients.fxml"));
-//
-//            Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
-//            Stage stage = new Stage();
-//            stage.setTitle("Clients report view");
-//            stage.setScene(scene);
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//
-//            ClientsController controller = fxmlLoader.getController();
-//            controller.setService(companyService);
-//
-//            stage.showAndWait();
-//
-//        } catch (IOException e) {
-//            Logger logger = Logger.getLogger(getClass().getName());
-//            logger.log(Level.SEVERE, "Failed to create new window: Clients report view.", e);
-//        }
-//
-//    }
 
     public void btnCarClick(ActionEvent actionEvent) {
         try {
@@ -94,9 +72,27 @@ public class MainController {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new window: Booking operations.", e);
         }
+    }
 
+    public void btnRentedByDaysMVClick(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/RentedByDays.fxml"));
 
+            Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+            Stage stage = new Stage();
+            stage.setTitle("Rentals report view");
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
 
+            RentedByDaysController controller = fxmlLoader.getController();
+            controller.setService(bookingService);
 
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new window: Rentals report view.", e);
+        }
     }
 }
